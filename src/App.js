@@ -89,12 +89,12 @@ function App() {
 
 				<input
 					id="firstName"
-					// type="text"
-					// placeholder="First Name"
-					// value={firstName}
-					// onInput={(event) => setFirstName(event.target.value)}
-					// autoComplete="off"
-					// className="insideSearchbar"
+					type="text"
+					placeholder="First Name"
+					value={firstName}
+					onInput={(event) => setFirstName(event.target.value)}
+					autoComplete="off"
+					className="insideSearchbar"
 				/>
 
 				<input
