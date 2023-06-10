@@ -1,62 +1,55 @@
-import React, { useEffect, useRef, useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import Searchbar from "./Searchbar";
-import endpoints from "./endpoints.json";
+import React, { useState } from "react";
+import "./App.scss";
+import config from "./config.js";
 
 function App() {
-	const [phoneNumber, setPhoneNumber] = useState("488");
-
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
-	const [clickedInsideSearchbar, setClickedInsideSearchbar] = useState(false);
+	const [courtAppearances, setCourtAppearances] = useState([]);
+
+	const [phoneNumber, setPhoneNumber] = useState("");
 	const [phoneErrorMessage, setPhoneErrorMessage] = useState("");
-
-	const [appearances, setAppearances] = useState([]);
-
-	// Thanks to Ben Bud's answer for inspiration
-	// Solution found at https://stackoverflow.com/a/42234988
-	// Keeps track of whether user is inside searchbar or not
-
-	const lastClickedClassName = useRef("");
-	useEffect(() => {
-		function handleClickOutside(event) {
-			const isPrevClickInside = lastClickedClassName.current === "insideSearchbar";
-			const isCurrentClickInside = event.target.className === "insideSearchbar";
-
-			if (isPrevClickInside && !isCurrentClickInside) {
-				console.log("click outside");
-				setClickedInsideSearchbar(false);
-			} else if (!isPrevClickInside && isCurrentClickInside) {
-				console.log("Click inside");
-				setClickedInsideSearchbar(true);
-			}
-
-			lastClickedClassName.current = event.target.className;
-		}
-		// Bind the event listener
-		document.addEventListener("mousedown", handleClickOutside);
-
-		return () => {
-			// Unbind the event listener on clean up
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
-	}, []);
 
 	/**
 	 * Handles a search by making an api request to get the appearances
 	 * @param {String} firstName
 	 * @param {String} lastName
 	 */
-	const handleSearch = (firstName, lastName) => {};
+	const handleSearch = async (firstName, lastName) => {
+		// Making that api call to get appearances
+		fetch(config.getAppearances, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				fname: firstName,
+				lname: lastName,
+			},
+		}).then(async (response) => {
+			if (response.status !== 200) {
+				alert("Something went wrong when trying to get appearances for this person.");
+				return;
+			}
+
+			// Converting the response into an actual javascript object
+			const objectResponse = JSON.parse(await response.json());
+
+			// Depending on json structure of the actual response, this key might be different
+			// For now I assume the key "appearances" contains the list of appearance
+			const key = "appearances";
+
+			setCourtAppearances(await objectResponse[key]);
+		});
+	};
 
 	/**
-	 * Handles the submission of a phone number by making a request
+	 * Handles the submission of a phone number.
+	 * Takes the uuid of the selected person and a phone number.
+	 * Then makes a request to the api to send notifications.
 	 * @param {String} uuid The unique user id of the selected person
 	 * @param {String} phoneNumber The phone number to which reminders will be sent
 	 */
 	const handlePhoneNumberSubmit = async (uuid, phoneNumber) => {
-		// A regex to check for the ###-###-#### phone format, and ONLY that dashed format
+		// A regex pattern to check for the ###-###-#### phone format, and ONLY that dashed format
 		const regexPattern = /^\d{3}-\d{3}-\d{4}$/;
 
 		// Checking if the phone number does not match the expected pattern
@@ -68,14 +61,19 @@ function App() {
 		// Clearing past errors
 		setPhoneErrorMessage("");
 
-		const response = await fetch(endpoints.subNotifications, {
+		// Making that api call to subscribe to notifications
+		fetch(config.subNotifications, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				uuid: uuid,
+				phoneNumber: phoneNumber,
 			},
+		}).then((response) => {
+			if (response.status !== 200) {
+				alert("Something went wrong when trying to subscribe to notifications");
+			}
 		});
-
-		setAppearances(await response.json());
 	};
 
 	return (
@@ -107,23 +105,32 @@ function App() {
 					className="insideSearchbar"
 				/>
 
-				<button onClick={handleSearch}>Search</button>
+				<button onClick={() => handleSearch(firstName, lastName)}>Search</button>
 
 				<p>Get text message reminders about your court appointment!</p>
 				<p>Enter your phone number down below:</p>
 				<p>Example: 123-456-7890</p>
 
+				<p class="userError">{phoneErrorMessage}</p>
+
 				<input
 					id="phone number"
 					type="text"
-					placeholder="Last Name"
-					value={lastName}
+					placeholder="123-456-7890"
+					value={phoneNumber}
 					onInput={(event) => setPhoneNumber(event.target.value)}
 					autoComplete="off"
 					className="insideSearchbar"
 				/>
 
-				<button onClick={handlePhoneNumberSubmit}>Get Text Messages</button>
+				<button
+					onClick={() => {
+						const uuids = courtAppearances.map((appearance) => appearance.uuid);
+						handlePhoneNumberSubmit(uuids, phoneNumber);
+					}}
+				>
+					Get Text Messages
+				</button>
 			</body>
 		</div>
 	);

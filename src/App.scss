@@ -1,0 +1,47 @@
+.App {
+	text-align: center;
+
+	$light-blue: #34aeeb;
+	$darker-blue: #0c72f0;
+
+	background-color: $darker-blue;
+	min-height: 100vh;
+}
+
+.App-header {
+	min-height: 10vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.4rem;
+	color: white;
+}
+
+.App-link {
+	color: #61dafb;
+}
+
+$bodyFontSize: 1.2rem;
+
+body {
+	width: 100vw;
+}
+
+p {
+	font-size: $bodyFontSize;
+	color: white;
+}
+
+input {
+	font-size: $bodyFontSize;
+	padding: calc($bodyFontSize/4);
+	border-radius: calc($bodyFontSize/1.5);
+	margin: calc($bodyFontSize/4);
+}
+
+button {
+	font-size: $bodyFontSize;
+	padding: calc($bodyFontSize/4);
+	border-radius: calc($bodyFontSize/1.5);
+}

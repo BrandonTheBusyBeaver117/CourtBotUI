@@ -1,15 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 export default function Searchbar(props) {
-	const [searchbarValue, setSearchbarValue] = useState("");
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [clickedInsideSearchbar, setClickedInsideSearchbar] = useState(false);
-
 	// Thanks to Ben Bud's answer for inspiration
 	// Solution found at https://stackoverflow.com/a/42234988
 
 	const lastClickedClassName = useRef("");
+
+	// Keeps track of whether user is inside searchbar or not
 	useEffect(() => {
 		function handleClickOutside(event) {
 			const isPrevClickInside = lastClickedClassName.current === "insideSearchbar";
@@ -35,9 +32,17 @@ export default function Searchbar(props) {
 	}, []);
 
 	/**
-        When there's a change to the searchbar, this function will run
-        It works to filter through the names and return matches
+        
     */
+
+	/**
+	 * When there's a change to the searchbar, this function will work to filter through the names
+	 * and return matches
+	 * @param {String[]} names
+	 * @param {String} inputValue
+	 * @param {Boolean} isClickedInsideSearchbar
+	 * @returns
+	 */
 	const handleChange = (names, inputValue, isClickedInsideSearchbar) => {
 		//console.log(inputValue)
 
@@ -86,26 +91,6 @@ export default function Searchbar(props) {
 
 	return (
 		<div className="searchbar">
-			<input
-				id="firstName"
-				type="text"
-				placeholder="First Name"
-				value={firstName}
-				onInput={(event) => setFirstName(event.target.value)}
-				autoComplete="off"
-				className="insideSearchbar"
-			/>
-
-			<input
-				id="lastName"
-				type="text"
-				placeholder="Last Name"
-				value={lastName}
-				onInput={(event) => setLastName(event.target.value)}
-				autoComplete="off"
-				className="insideSearchbar"
-			/>
-
 			<div className="results">{handleChange(props.teamInformation, searchbarValue, clickedInsideSearchbar)}</div>
 		</div>
 	);
