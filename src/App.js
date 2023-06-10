@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.scss";
 import config from "./config.js";
+import axios from "axios";
 
 function App() {
 	const [firstName, setFirstName] = useState("");
@@ -17,28 +18,27 @@ function App() {
 	 */
 	const handleSearch = async (firstName, lastName) => {
 		// Making that api call to get appearances
-		fetch(config.getAppearances, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				fname: firstName,
-				lname: lastName,
-			},
-		}).then(async (response) => {
-			if (response.status !== 200) {
-				alert("Something went wrong when trying to get appearances for this person.");
-				return;
-			}
+		axios
+			.get(config.getAppearances, {
+				headers: {
+					fname: firstName,
+					lname: lastName,
+				},
+			})
+			.then((response) => {
+				console.log(response);
+				if (response.status !== 200) {
+					alert("Something went wrong when trying to get appearances for this person.");
+					return;
+				}
 
-			// Converting the response into an actual javascript object
-			const objectResponse = JSON.parse(await response.json());
+				// Depending on json structure of the actual response, this key might be different
+				// For now I assume the key "appearances" contains the list of appearance
+				const key = "appearances";
 
-			// Depending on json structure of the actual response, this key might be different
-			// For now I assume the key "appearances" contains the list of appearance
-			const key = "appearances";
-
-			setCourtAppearances(await objectResponse[key]);
-		});
+				setCourtAppearances(response.data[key]);
+			})
+			.catch((error) => console.log(error));
 	};
 
 	/**
@@ -62,18 +62,19 @@ function App() {
 		setPhoneErrorMessage("");
 
 		// Making that api call to subscribe to notifications
-		fetch(config.subNotifications, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				uuid: uuid,
-				phoneNumber: phoneNumber,
-			},
-		}).then((response) => {
-			if (response.status !== 200) {
-				alert("Something went wrong when trying to subscribe to notifications");
-			}
-		});
+		axios
+			.post(config.subNotifications, {
+				headers: {
+					uuid: uuid,
+					phoneNumber: phoneNumber,
+				},
+			})
+			.then((response) => {
+				if (response.status !== 200) {
+					alert("Something went wrong when trying to subscribe to notifications");
+				}
+			})
+			.catch((error) => console.log(error));
 	};
 
 	return (
