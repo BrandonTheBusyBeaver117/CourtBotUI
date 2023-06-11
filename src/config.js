@@ -1,10 +1,10 @@
 const config = {
 	// Endpoints
 	/** The endpoint for getting the court appearances of a person */
-	getAppearances: "https://www.boredapi.com/api/activity",
+	getAppearances: "/getAppearances",
 
 	/** The endpoint for subscribing to notifications */
-	subNotifications: "https://www.boredapi.com/api/activity",
+	subNotifications: "/subNotifications",
 
 	// dev-mode, allows for direct toggling between features
 	devMode: true,
