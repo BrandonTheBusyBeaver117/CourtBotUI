@@ -6,21 +6,24 @@ const config = {
 	/** The endpoint for subscribing to notifications */
 	subNotifications: "/subNotifications",
 
-	// dev-mode, allows for direct toggling between features
-	devMode: true,
+	// Developer tools:
+	// The following features can be helpful for fiddling with the website during dev work,
+	// but should usually be TURNED OFF when actually deploying the website
 
-	// Mock data
+	// Allows toggling between different possible layouts
+	toggleLayout: false,
+
 	/**
 	 * Setting 'useMockData' this on means that the website won't send requests, and
-	 * instead use the mock data defined below
+	 * instead use the mock data defined below.
 	 */
-	useMockData: true,
+	useMockData: false,
 
 	// Not really used, but a list of random names
 	mockNames: ["John", "Adam", "Apple", "Joe", "Bob", "Zach", "Ted", "Mark", "Yee", "Richard", "Mall"],
 
 	/**
-	 * An array of 'appearance' object literals
+	 * A mock array of 'appearance' object literals
 	 */
 	mockAppearances: [
 		{
