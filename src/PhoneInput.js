@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import config from "./config.js";
+import { Endpoints } from "./config.js";
 import axios from "axios";
 
 export default function PhoneInput(props) {
@@ -28,7 +28,7 @@ export default function PhoneInput(props) {
 
 		// Making that api call to subscribe to notifications
 		axios
-			.post(config.subNotifications, {
+			.post(Endpoints.subNotifications, {
 				headers: {
 					uuid: uuid,
 					phoneNumber: phoneNumber,
@@ -48,11 +48,11 @@ export default function PhoneInput(props) {
 			<p>Enter your phone number down below:</p>
 			<p>Example: 123-456-7890</p>
 
-			<p class="userError">{phoneErrorMessage}</p>
+			<p className="userError">{phoneErrorMessage}</p>
 
 			<input
 				id="phone number"
-				type="text"
+				type="tel"
 				placeholder="123-456-7890"
 				value={phoneNumber}
 				onInput={(event) => setPhoneNumber(event.target.value)}
