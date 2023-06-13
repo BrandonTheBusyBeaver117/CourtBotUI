@@ -27,12 +27,22 @@ const MockData = {
 	 */
 	useMockData: false,
 
-	// Not really used, but a list of random names
-	mockNames: ["John", "Adam", "Apple", "Joe", "Bob", "Zach", "Ted", "Mark", "Yee", "Richard", "Mall"],
+	/** Mock names*/
+	mockNames: [
+		"John Thomas",
+		"Steph Adam",
+		"Orange Apple",
+		"Jessica Joe",
+		"Bob Jude",
+		"Andrea Zach",
+		"Ted Match",
+		"Penelope Mark",
+		"Kaleb Yee",
+		"Richard Shake",
+		"Tyrus Mall",
+	],
 
-	/**
-	 * A mock array of 'appearance' object literals
-	 */
+	/** A mock array of 'appearance' object literals */
 	mockAppearances: [
 		{
 			uuid: "hfjkshdfksfdhj-yydsfjh-fgjhsdjgdfs",
