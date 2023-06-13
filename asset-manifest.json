@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/CourtBotUI/static/css/main.0215820c.css",
+    "main.js": "/CourtBotUI/static/js/main.e8a8f760.js",
+    "static/js/787.5d49e676.chunk.js": "/CourtBotUI/static/js/787.5d49e676.chunk.js",
+    "index.html": "/CourtBotUI/index.html",
+    "main.0215820c.css.map": "/CourtBotUI/static/css/main.0215820c.css.map",
+    "main.e8a8f760.js.map": "/CourtBotUI/static/js/main.e8a8f760.js.map",
+    "787.5d49e676.chunk.js.map": "/CourtBotUI/static/js/787.5d49e676.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0215820c.css",
+    "static/js/main.e8a8f760.js"
+  ]
+}
