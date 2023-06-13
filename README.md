@@ -14,8 +14,10 @@ Once installation has finished, run `npm start` to start the project
 
 # Changing/Adding behavior
 
-I have set the frontend in a way that will proxy requests to a server on localhost:5000, so test servers should be running on that
+I have set up the frontend in a way that will proxy requests to a server on localhost:5000, so test servers should be running on that
 
-The configure.js file has several variables and endpoints that can be changed to test the app, as well as change its behavior
+If you'd like to change that port, go into package.json and change that "proxy" attribute to whatever you want
 
-For instance, the actual endpoint names can be changed, as well as using mock data to test or not
+The config.js file has several variables and endpoints that can be changed to test the app, as well as change its behavior
+
+For instance, the actual endpoint urls and names can be changed, as well as using mock data to test if the app works as expected
