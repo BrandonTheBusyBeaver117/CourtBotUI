@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Endpoints, MockData } from "./config.js";
 import axios from "axios";
 import Select from "react-select";
-import { SearchSettings } from "./config";
+//import { SearchSettings } from "./config";
 import "./NameInput.scss";
 
 /** Component to take in and return names */
