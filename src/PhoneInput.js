@@ -28,7 +28,7 @@ export default function PhoneInput(props) {
 
 		// Making that api call to subscribe to notifications
 		axios
-			.post(Endpoints.subNotifications, {
+			.get(Endpoints.subNotifications, {
 				headers: {
 					uuid: uuid,
 					phoneNumber: phoneNumber,
