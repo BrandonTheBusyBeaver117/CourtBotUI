@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Endpoints } from "./config.js";
+import { Endpoints } from "../config.js";
 import axios from "axios";
 
 export default function PhoneInput(props) {
