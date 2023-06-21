@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import Endpoints from "./Endpoints";
+import Endpoints from "../Endpoints";
 import axios from "axios";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import "./PhoneNumberInput.scss";
 
-export default function PhoneInput(props) {
+export default function PhoneNumberInput(props) {
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [phoneErrorMessage, setPhoneErrorMessage] = useState("");
 
@@ -43,23 +46,25 @@ export default function PhoneInput(props) {
 	};
 
 	return (
-		<div>
+		<div className="phoneNumberInput">
 			<p>Get text message reminders about your court appointment!</p>
 			<p>Enter your phone number down below:</p>
 			<p>Example: 123-456-7890</p>
 
 			<p className="userError">{phoneErrorMessage}</p>
 
-			<input
-				id="phone number"
-				type="tel"
-				placeholder="123-456-7890"
-				value={phoneNumber}
-				onInput={(event) => setPhoneNumber(event.target.value)}
-				autoComplete="off"
-				className="insideSearchbar"
-			/>
-
+			<div className="phoneWrapper">
+				<PhoneInput
+					id="phoneNumber"
+					country={"us"}
+					onlyCountries={["us"]}
+					disableDropdown={true}
+					disableCountryCode={true}
+					onChange={(phoneNumber) => setPhoneNumber(phoneNumber)}
+					value={phoneNumber}
+					placeholder="(408) 123-4567"
+				/>
+			</div>
 			<button
 				onClick={() => {
 					const uuids = props.courtAppearances.map((appearance) => appearance.uuid);
