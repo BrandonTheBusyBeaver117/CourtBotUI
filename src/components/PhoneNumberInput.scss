@@ -1,10 +1,7 @@
-.phoneWrapper {
-	margin: auto;
-	background-color: black;
-	width: 25%;
+.flag-dropdown {
+	display: none;
 }
 
 .phoneNumberInput {
-	flex-grow: 1;
-	flex-basis: 0;
+	grid-column: span 3;
 }
