@@ -1,11 +1,15 @@
+$text: #020a0d;
+$background: #ade4ff;
+$primary-button: #f1f0ff;
+$secondary-button: #99ff85;
+$accent: #3ab6df;
+
 .App {
 	text-align: center;
 
-	$light-blue: #34aeeb;
-	$darker-blue: #0c72f0;
-
-	background-color: $darker-blue;
+	background-color: $background;
 	min-height: 100vh;
+	min-width: 100vw;
 }
 
 .App-header {
@@ -16,32 +20,46 @@
 	justify-content: center;
 	font-size: 1.4rem;
 	color: white;
-}
-
-.App-link {
-	color: #61dafb;
+	background-color: rgba(0, 0, 0, 0.35);
+	#App-title {
+		margin-bottom: 0.25rem;
+		text-decoration: underline;
+	}
+	#App-description {
+		margin-top: 0.25rem;
+	}
+	margin-bottom: 1rem;
 }
 
 $bodyFontSize: 1.2rem;
 
 body {
-	width: 100vw;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-auto-rows: minmax(0, 1fr);
+	min-height: 60vh;
 }
 
 p {
 	font-size: $bodyFontSize;
-	color: white;
-}
+	margin: calc($bodyFontSize/2);
 
-input {
-	font-size: $bodyFontSize;
-	padding: calc($bodyFontSize/4);
-	border-radius: calc($bodyFontSize/1.5);
-	margin: calc($bodyFontSize/4);
+	color: black;
 }
 
 button {
 	font-size: $bodyFontSize;
-	padding: calc($bodyFontSize/4);
+	padding: calc($bodyFontSize/2);
+	margin: calc($bodyFontSize/2);
+
 	border-radius: calc($bodyFontSize/1.5);
+
+	background-color: $primary-button;
+	transition: background-color 0.3s ease-in;
+
+	&:hover:enabled {
+		background-color: $secondary-button;
+		transition: background-color 0.3s ease-in;
+		cursor: pointer;
+	}
 }
