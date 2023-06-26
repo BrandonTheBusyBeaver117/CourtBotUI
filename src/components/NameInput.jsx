@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
-import Endpoints from "./Endpoints.js";
-import MockData from "./MockData.js";
+import React, { useState, useEffect, useContext } from "react";
+import Endpoints from "../Endpoints.js";
+import MockData from "../MockData.js";
 import axios from "axios";
 import Select from "react-select";
+import Next from "./Next";
+import { Context } from "../State";
 import "./NameInput.scss";
+import Back from "./Back.jsx";
 
 /** Component to take in and return names */
-export default function NameInput(props) {
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
+export default function NameInput() {
+	const [state, dispatch] = useContext(Context);
+
+	console.log(state);
 
 	/** List of all names in a {value, label} format*/
 	const [allNames, setAllNames] = useState([]);
@@ -67,44 +71,43 @@ export default function NameInput(props) {
 				}
 
 				// Setting the court appearances
-				props.setCourtAppearances(response.data[Endpoints.appearanceKey]);
+
+				dispatch({ type: "set", prop: "appearances", val: response.data[Endpoints.appearanceKey] });
 			})
 			.catch((error) => console.log(error));
 	};
 
 	return (
-		<div>
-			<p>Enter your name here</p>
+		<div className="nameInput">
+			<p>Enter your first and last name</p>
 			<div className="results">
 				<Select
-					className="insideSearchbar"
 					options={allNames}
 					onChange={(name) => {
-						console.log(name);
-						const [fName, lName] = name.value.split(" ");
-						setFirstName(fName);
-						setLastName(lName);
+						dispatch({ type: "set", prop: "appearances", val: [] });
+						dispatch({ type: "set", prop: "name", val: name });
+
+						// If we want to use mock data, just use the mock appearances
+						if (MockData.useMockData) {
+							dispatch({ type: "set", prop: "appearances", val: MockData.mockAppearances });
+							return;
+						}
+
+						// Otherwise, handle search normally
+						handleSearch(name.split(" "));
 					}}
 					isSearchable={true}
-					placeholder="FirstName LastName"
+					placeholder="Jane Doe"
 					noOptionsMessage={() => "Nobody found with that name"}
 				/>
 			</div>
-
-			<button
-				onClick={() => {
-					// If we want to use mock data, just use the mock appearances
-					if (MockData.useMockData) {
-						props.setCourtAppearances(MockData.mockAppearances);
-						return;
-					}
-
-					// Otherwise, handle search normally
-					handleSearch(firstName, lastName);
-				}}
-			>
-				Search
-			</button>
+			<Back />
+			<Next
+				disabledConditions={(() => {
+					if (state.appearances.length === 0 || state.name === "") return true;
+					return false;
+				})()}
+			></Next>
 		</div>
 	);
 }

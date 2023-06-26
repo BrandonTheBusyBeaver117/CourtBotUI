@@ -1,0 +1,11 @@
+.results {
+	max-width: 40vw;
+	// Change to flexbox later
+	margin: auto;
+}
+
+.nameInput {
+	// flex-grow: 1;
+	// flex-basis: 0;
+	grid-column: span 3;
+}
