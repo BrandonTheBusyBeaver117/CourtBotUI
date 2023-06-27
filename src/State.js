@@ -8,7 +8,7 @@ export const isNextDisabled = (state) => {
 			if (state.name === "" || state.appearances.length === 0) return true;
 			return false;
 		case "Phone":
-			if (state.phoneNumber.length !== 10) return true;
+			if (state.rawPhoneNumber.length !== 10 || state.formattedPhoneNumber === "") return true;
 			return false;
 		case "Submit":
 			return false;
@@ -22,7 +22,8 @@ export const isNextDisabled = (state) => {
 export const initialState = {
 	name: "",
 	appearances: [],
-	phoneNumber: "",
+	rawPhoneNumber: "",
+	formattedPhoneNumber: "",
 	mode: Modes[0],
 };
 

@@ -3,8 +3,6 @@ import Endpoints from "../Endpoints";
 import axios from "axios";
 import "./Submit.scss";
 import { Context } from "../State";
-import Back from "./Back";
-import Next from "./Next";
 
 export default function Submit() {
 	const [state, dispatch] = useContext(Context);
@@ -17,6 +15,7 @@ export default function Submit() {
 	 * @param {String} phoneNumber The phone number to which reminders will be sent
 	 */
 	const handleSubmit = async (uuid, phoneNumber) => {
+		console.log(phoneNumber);
 		// Making that api call to subscribe to notifications
 		axios
 			.get(Endpoints.subNotifications, {
@@ -37,12 +36,13 @@ export default function Submit() {
 		<div className="submit">
 			<div className="text-confirm">
 				<p>Name: {state.name}</p>
-				<p>Phone-Number: {state.phoneNumber}</p>
+				<p>Phone-Number: {state.formattedPhoneNumber}</p>
 			</div>
 			<button
 				onClick={() => {
 					const uuids = state.appearances.map((appearance) => appearance.uuid);
-					handleSubmit(uuids, state.phoneNumber);
+
+					handleSubmit(uuids, state.formattedPhoneNumber);
 				}}
 			>
 				Get text message reminders about your court appointment!
