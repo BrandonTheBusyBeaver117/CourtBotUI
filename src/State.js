@@ -1,6 +1,23 @@
 import React from "react";
 
-export const Modes = ["Name", "Phone", "Submit"];
+export const Modes = ["Name", "Phone", "Submit", "End"];
+
+export const isNextDisabled = (state) => {
+	switch (state.mode) {
+		case "Name":
+			if (state.name === "" || state.appearances.length === 0) return true;
+			return false;
+		case "Phone":
+			if (state.phoneNumber.length !== 10) return true;
+			return false;
+		case "Submit":
+			return false;
+		case "End":
+			return true;
+		default:
+			return false;
+	}
+};
 
 export const initialState = {
 	name: "",
@@ -14,7 +31,6 @@ export const Context = React.createContext(initialState);
 export const reducer = (state, action) => {
 	switch (action.type) {
 		case "nextMode":
-			console.log("yo");
 			return {
 				...state,
 				mode: Modes[Modes.indexOf(state.mode) + 1],
@@ -29,6 +45,13 @@ export const reducer = (state, action) => {
 				...state,
 				[action.prop]: action.val,
 			};
+		case "reset":
+			return {
+				...initialState,
+			};
+		default:
+			console.log("Something terrible has happened, your action is invalid");
+			console.log(action);
 	}
 };
 
