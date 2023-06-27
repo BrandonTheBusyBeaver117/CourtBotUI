@@ -35,9 +35,14 @@ $bodyFontSize: 1.2rem;
 
 body {
 	display: grid;
-	grid-template-columns: repeat(6, 1fr);
+	grid-template-columns: repeat(7, 1fr);
 	grid-auto-rows: minmax(0, 1fr);
 	min-height: 60vh;
+	.current-wrapper {
+		grid-row: span 3;
+		grid-column-start: 2;
+		grid-column-end: 7;
+	}
 }
 
 p {

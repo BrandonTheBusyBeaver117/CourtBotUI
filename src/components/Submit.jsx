@@ -34,9 +34,11 @@ export default function Submit() {
 			.catch((error) => console.log(error));
 	};
 	return (
-		<div className="Submit">
-			<p>Name: {state.name}</p>
-			<p>Phone-Number: {state.phoneNumber}</p>
+		<div className="submit">
+			<div className="text-confirm">
+				<p>Name: {state.name}</p>
+				<p>Phone-Number: {state.phoneNumber}</p>
+			</div>
 			<button
 				onClick={() => {
 					const uuids = state.appearances.map((appearance) => appearance.uuid);
