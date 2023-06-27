@@ -11,9 +11,7 @@ import Next from "./components/Next";
 function App() {
 	const [state, dispatch] = useContext(Context);
 
-	console.log(state.mode);
 	const currentComponent = (() => {
-		console.log(state.mode);
 		switch (state.mode) {
 			case "Name":
 				return <NameInput />;

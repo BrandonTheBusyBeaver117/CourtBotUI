@@ -10,13 +10,9 @@ const Back = ({ disabledConditions = false }) => {
 	const currentStateIndex = Modes.indexOf(state.mode);
 
 	const isDisabled = (() => {
-		console.log(currentStateIndex);
 		if (currentStateIndex <= 0) return true;
 		return disabledConditions;
 	})();
-
-	console.log(state);
-	console.log(state.mode);
 
 	return (
 		<SwitchComponent
