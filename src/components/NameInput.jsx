@@ -83,7 +83,10 @@ export default function NameInput() {
 			<div className="results">
 				<Select
 					options={allNames}
+					defaultInputValue={state.name}
 					onChange={(name) => {
+						if (name.value === state.name) return;
+
 						dispatch({ type: "set", prop: "appearances", val: [] });
 						dispatch({ type: "set", prop: "name", val: name.value });
 
