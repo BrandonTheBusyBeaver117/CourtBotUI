@@ -85,7 +85,7 @@ export default function NameInput() {
 					options={allNames}
 					onChange={(name) => {
 						dispatch({ type: "set", prop: "appearances", val: [] });
-						dispatch({ type: "set", prop: "name", val: name });
+						dispatch({ type: "set", prop: "name", val: name.value });
 
 						// If we want to use mock data, just use the mock appearances
 						if (MockData.useMockData) {
@@ -94,20 +94,13 @@ export default function NameInput() {
 						}
 
 						// Otherwise, handle search normally
-						handleSearch(name.split(" "));
+						handleSearch(name.value.split(" "));
 					}}
 					isSearchable={true}
 					placeholder="Jane Doe"
 					noOptionsMessage={() => "Nobody found with that name"}
 				/>
 			</div>
-			<Back />
-			<Next
-				disabledConditions={(() => {
-					if (state.appearances.length === 0 || state.name === "") return true;
-					return false;
-				})()}
-			></Next>
 		</div>
 	);
 }

@@ -24,13 +24,6 @@ export default function PhoneNumberInput() {
 					placeholder="(408) 123-4567"
 				/>
 			</div>
-			<Back />
-			<Next
-				disabledConditions={(() => {
-					if (state.phoneNumber.length !== 10) return true;
-					return false;
-				})()}
-			></Next>
 		</div>
 	);
 }

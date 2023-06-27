@@ -3,7 +3,10 @@ import "./App.scss";
 import { Context } from "./State";
 import NameInput from "./components/NameInput";
 import PhoneNumberInput from "./components/PhoneNumberInput";
-import Confirm from "./components/Confirm";
+import Submit from "./components/Submit";
+import End from "./components/End";
+import Back from "./components/Back";
+import Next from "./components/Next";
 
 function App() {
 	const [state, dispatch] = useContext(Context);
@@ -13,13 +16,15 @@ function App() {
 		console.log(state.mode);
 		switch (state.mode) {
 			case "Name":
-				return <NameInput></NameInput>;
+				return <NameInput />;
 			case "Phone":
-				return <PhoneNumberInput></PhoneNumberInput>;
+				return <PhoneNumberInput />;
 			case "Submit":
-				return <Confirm></Confirm>;
+				return <Submit />;
+			case "End":
+				return <End />;
 			default:
-				<p>Invalid state, something has gone terribly wrong</p>;
+				<p>Invalid state, {state.mode}</p>;
 		}
 	})();
 
@@ -29,7 +34,11 @@ function App() {
 				<h1 id="App-title">CourtBot</h1>
 				<h2 id="App-description">An open source tool to remind you of court appointments</h2>
 			</header>
-			<body>{currentComponent}</body>
+			<body>
+				<div className="current-wrapper">{currentComponent}</div>
+				<Back />
+				<Next />
+			</body>
 		</div>
 	);
 }
