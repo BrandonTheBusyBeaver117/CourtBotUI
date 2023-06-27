@@ -1,0 +1,16 @@
+.nameInput {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.75);
+
+	align-items: center;
+
+	text-align: left;
+
+	justify-content: space-around;
+	.results {
+		margin-bottom: 5%;
+	}
+}

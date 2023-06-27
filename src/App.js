@@ -1,20 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./App.scss";
-import NameInput from "./NameInput";
-import PhoneInput from "./PhoneInput";
+import { Context } from "./State";
+import NameInput from "./components/NameInput";
+import PhoneNumberInput from "./components/PhoneNumberInput";
+import Submit from "./components/Submit";
+import End from "./components/End";
+import Back from "./components/Back";
+import Next from "./components/Next";
 
 function App() {
-	const [courtAppearances, setCourtAppearances] = useState([]);
+	const [state, dispatch] = useContext(Context);
+
+	console.log(state.mode);
+	const currentComponent = (() => {
+		console.log(state.mode);
+		switch (state.mode) {
+			case "Name":
+				return <NameInput />;
+			case "Phone":
+				return <PhoneNumberInput />;
+			case "Submit":
+				return <Submit />;
+			case "End":
+				return <End />;
+			default:
+				<p>Invalid state, {state.mode}</p>;
+		}
+	})();
 
 	return (
 		<div className="App">
 			<header className="App-header">
-				<h1>CourtBot</h1>
-				<h2>An open source tool to remind you of court appointments</h2>
+				<h1 id="App-title">CourtBot</h1>
+				<h2 id="App-description">An open source tool to remind you of court appointments</h2>
 			</header>
 			<body>
-				<NameInput setCourtAppearances={setCourtAppearances} />
-				<PhoneInput courtAppearances={courtAppearances} />
+				<div className="current-wrapper">{currentComponent}</div>
+				<Back />
+				<Next />
 			</body>
 		</div>
 	);
