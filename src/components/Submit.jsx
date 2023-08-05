@@ -11,19 +11,21 @@ export default function Submit() {
 	 * Handles the submission of a request
 	 * Takes the uuid of the selected person and a phone number.
 	 * Then makes a request to the api to send notifications.
-	 * @param {String} uuid The unique user id of the selected person
+	 * @param {String} stringifiedUuids The unique uuid of each event for the selected person, comma separated
 	 * @param {String} phoneNumber The phone number to which reminders will be sent
 	 */
-	const handleSubmit = async (uuid, phoneNumber) => {
+	const handleSubmit = async (stringifiedUuids, phoneNumber) => {
 		console.log(phoneNumber);
 		// Making that api call to subscribe to notifications
 		axios
-			.get(Endpoints.subNotifications, {
-				headers: {
-					uuid: uuid,
-					phoneNumber: phoneNumber,
-				},
-			})
+			.get(`${Endpoints.subNotifications}?uuids=${stringifiedUuids}phone=${phoneNumber}email=${""}`
+			// 	, {
+			// 	headers: {
+			// 		uuid: uuid,
+			// 		phoneNumber: phoneNumber,
+			// 	},
+			// }
+			)
 			.then((response) => {
 				if (response.status !== 200) {
 					alert("Something went wrong when trying to subscribe to notifications, please try again");
@@ -33,16 +35,26 @@ export default function Submit() {
 			.catch((error) => console.log(error));
 	};
 	return (
-		<div className="submit">
+		<div className="submit input-component">
 			<div className="text-confirm">
-				<p>Name: {state.name}</p>
-				<p>Phone-Number: {state.formattedPhoneNumber}</p>
+				<h2>Confirm your information</h2>
+
+				<p>First Name: {state.firstName}</p>
+				<p>Last Name: {state.lastName}</p>
+				<p>Phone Number: {state.prettifiedPhoneNumber}</p>
 			</div>
 			<button
 				onClick={() => {
-					const uuids = state.appearances.map((appearance) => appearance.uuid);
+					const uuids = (state.appearances.map((appearance) => appearance.uuid));
 
-					handleSubmit(uuids, state.formattedPhoneNumber);
+					// Adds all elements together in csv
+					const stringifiedUuids = (uuids.reduce((previous, current) => previous + "," + current));
+
+					alert(stringifiedUuids)
+
+					const formattedNumber = state.rawPhoneNumber.slice(0,3) + "-" + state.rawPhoneNumber.slice(3,6) + "-" + state.rawPhoneNumber.slice(6)
+
+					handleSubmit(uuids, formattedNumber);
 				}}
 			>
 				Get text message reminders about your court appointment!

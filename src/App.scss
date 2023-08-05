@@ -28,7 +28,7 @@ $accent: #3ab6df;
 	#App-description {
 		margin-top: 0.25rem;
 	}
-	margin-bottom: 1rem;
+	margin-bottom: 2.5vh;
 }
 
 $bodyFontSize: 1.2rem;
@@ -36,12 +36,17 @@ $bodyFontSize: 1.2rem;
 body {
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
-	grid-auto-rows: minmax(0, 1fr);
+	//grid-auto-rows: minmax(0, 1fr);
+	grid-auto-rows: minmax(0, 15vh);
 	min-height: 60vh;
 	.current-wrapper {
 		grid-row: span 3;
 		grid-column-start: 2;
 		grid-column-end: 7;
+		.input-component {
+			// Maybe change to relative value later?
+			border-radius: 40px;
+		}
 	}
 }
 
@@ -57,6 +62,8 @@ button {
 	padding: calc($bodyFontSize/2);
 	margin: calc($bodyFontSize/2);
 
+	
+
 	border-radius: calc($bodyFontSize/1.5);
 
 	background-color: $primary-button;
@@ -67,4 +74,9 @@ button {
 		transition: background-color 0.3s ease-in;
 		cursor: pointer;
 	}
+}
+
+.submit-button {
+	height: 15vh;
+	width: calc(100vw * 2/7);
 }

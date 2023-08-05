@@ -1,18 +1,14 @@
+const proxyUrl = "https://cors-anywhere.herokuapp.com/"
+
 const Endpoints = {
+
 	/** The endpoint for getting the court appearances of a person */
-	getAppearances: "/getAppearances",
-
-	/** The key in the getAppearances response containing the appearance data */
-	appearanceKey: "appearances",
-
-	/** The endpoint for getting all the peoples' names on file */
-	getAllNames: "/getAllNames",
-
-	/** The key in the getAllNames response containing the all the name data */
-	allNamesKey: "allNames",
+	getAppearances: proxyUrl + "http://50.116.13.181:8080/courtbot/getAppearances",
 
 	/** The endpoint for subscribing to notifications */
-	subNotifications: "/subNotifications",
+	subNotifications: proxyUrl + "http://50.116.13.181:8080/courtbot/register",
+
+	getRandom: proxyUrl + "http://50.116.13.181:8080/courtbot/getRandom",
 };
 
 export default Endpoints;

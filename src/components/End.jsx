@@ -6,7 +6,7 @@ const End = () => {
 	const [state, dispatch] = useContext(Context);
 
 	return (
-		<div className="end">
+		<div className="end input-component">
 			<div className="text-end">
 				<p>Success!</p>
 				<p>Your text reminders will begin shortly</p>

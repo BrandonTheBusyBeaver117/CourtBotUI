@@ -2,14 +2,24 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../State";
 
-const SwitchComponent = ({ action, isDisabled, label, className = "" }) => {
-	const [, dispatch] = useContext(Context);
+const SwitchComponent = ({ action, isDisabled, label, className = ""}) => {
+	const [state , dispatch] = useContext(Context);
 
 	return (
 		<button
 			className={`switch ${className}`}
 			disabled={isDisabled}
-			onClick={() => dispatch({ type: action })}
+			onClick={async () => {
+
+				if(state.unsavedChanges &&
+				   !window.confirm("You have unsaved changes! Do you still wish to proceed and lose your changes?")){
+					return;
+				}
+
+
+				dispatch({ type: action })
+				dispatch({ type: "set", prop: "unsavedChanges", val: false})
+			}}
 		>
 			{label}
 		</button>
