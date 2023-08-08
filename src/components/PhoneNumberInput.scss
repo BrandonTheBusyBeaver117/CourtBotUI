@@ -1,0 +1,28 @@
+.flag-dropdown {
+	display: none;
+}
+
+.phoneNumberInput {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.75);
+
+	align-items: center;
+
+	justify-content: space-around;
+
+	// Getting rid of the incrementers on a number input
+	/* Chrome, Safari, Edge, Opera */
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type=number] {
+		-moz-appearance: textfield;
+	}
+}
