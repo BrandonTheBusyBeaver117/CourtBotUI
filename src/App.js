@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, {useContext } from "react";
 import "./App.scss";
 import { Context } from "./State";
 import NameInput from "./components/NameInput";
@@ -9,7 +9,7 @@ import Back from "./components/Back";
 import Next from "./components/Next";
 
 function App() {
-	const [state, dispatch] = useContext(Context);
+	const [state, ] = useContext(Context);
 
 	const currentComponent = (() => {
 		switch (state.mode) {
