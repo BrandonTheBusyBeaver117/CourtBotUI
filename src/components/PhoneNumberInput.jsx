@@ -53,9 +53,9 @@ export default function PhoneNumberInput() {
 		if(formattedNumber.length <= 3){
 			formattedNumber = "(" + formattedNumber + " ".repeat(3 - formattedNumber.length) +  ")"
 		} else if (formattedNumber.length <= 6){
-			formattedNumber = "(" + formattedNumber.slice(0,3) + ")" + " " + formattedNumber.slice(3) 
+			formattedNumber = "(" + formattedNumber.slice(0,3) + ") " + formattedNumber.slice(3) 
 		} else{
-			formattedNumber = "(" + formattedNumber.slice(0,3) + ")" + " " + formattedNumber.slice(3, 6) + "-" +  formattedNumber.slice(6, 10)
+			formattedNumber = "(" + formattedNumber.slice(0,3) + ") " + formattedNumber.slice(3, 6) + "-" + formattedNumber.slice(6, 10)
 		} 	
 
 		return formattedNumber

@@ -4,15 +4,10 @@ import SwitchComponent from "./SwitchComponent";
 import { Context, Modes} from "../State";
 import "./Next.scss";
 
-import axios from "axios";
-import Endpoints from "../Endpoints.js";
-
-
-
 
 
 const Next = ({ disabledConditions = false }) => {
-	const [state, dispatch] = useContext(Context);
+	const [state, ] = useContext(Context);
 
 		
 	const isNextDisabled = (state) => {

@@ -3,7 +3,7 @@ import "./End.scss";
 import { Context } from "../State";
 
 const End = () => {
-	const [state, dispatch] = useContext(Context);
+	const [, dispatch] = useContext(Context);
 
 	return (
 		<div className="end input-component">

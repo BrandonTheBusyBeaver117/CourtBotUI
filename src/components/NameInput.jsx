@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext} from "react";
 import Endpoints from "../Endpoints.js";
-import MockData from "../MockData.js";
 import axios from "axios";
 //import Select from "react-select";
 import { Context } from "../State";
@@ -20,7 +19,7 @@ export default function NameInput() {
 
 		dispatch({ type: "set", prop: "unsavedChanges", val: unsavedChanges });
 
-	}, [firstName, lastName])
+	})
 
 
 	return (

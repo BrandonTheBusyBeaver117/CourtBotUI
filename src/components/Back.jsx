@@ -5,7 +5,7 @@ import { Context, Modes } from "../State";
 import "./Back.scss";
 
 const Back = ({ disabledConditions = false }) => {
-	const [state, dispatch] = useContext(Context);
+	const [state, ] = useContext(Context);
 
 	const currentStateIndex = Modes.indexOf(state.mode);
 
