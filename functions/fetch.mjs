@@ -7,5 +7,9 @@ export const handler = async (event, context) => {
 
     const data = await axios.get(fetchedUrl).then(response => response.data)
 
-    return JSON.stringify(data)
+    return {
+        statusCode: 200,
+        data: JSON.stringify(data),
+        body: JSON.stringify(data)
+    }
 };
