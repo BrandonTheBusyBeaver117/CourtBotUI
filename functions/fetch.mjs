@@ -10,7 +10,7 @@ export const handler = async (event, context) => {
 
 
     console.log("raw path: " + event.path)
-    console.log("query parameters path: " + event.queryStringParameters)
+    console.log("query parameters path: " + JSON.stringify(event.queryStringParameters))
     console.log("fetchedurl: " + fetchedUrl)
     console.log(data)
 
