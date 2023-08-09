@@ -8,7 +8,10 @@ export const handler = async (event, context) => {
 
     const data = await axios.get(fetchedUrl).then(response => response.data)
 
-    console.log(fetchedUrl)
+
+    console.log("raw path: " + event.path)
+    console.log("query parameters path: " + event.queryStringParameters)
+    console.log("fetchedurl: " + fetchedUrl)
     console.log(data)
 
     return {
