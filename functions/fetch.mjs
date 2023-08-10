@@ -23,7 +23,7 @@ export const handler = async (event, context) => {
 
     const data = await axios.get(fetchedUrl).then(response => response.data)
 
-    console.log("Event:" + event)
+    console.log("Event:" + JSON.stringify(event))
     console.log("raw url??" + event.url)
     console.log("raw path: " + event.path)
     console.log("query parameters path: " + JSON.stringify(event.queryStringParameters))
