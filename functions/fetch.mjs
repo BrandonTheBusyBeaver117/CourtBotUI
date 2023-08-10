@@ -4,30 +4,12 @@ export const handler = async (event, context) => {
 
     // Cursed, but MVP lol
     // Slicing to get the actual url wanted
-    let fetchedUrl = event.path.slice(event.path.indexOf("http")) 
-
-    let firstIteration = true;
-
-    Object.entries(event.queryStringParameters).forEach((entry) => {
-
-        if(firstIteration){
-            fetchedUrl += "?"
-            firstIteration = false;
-        } else {
-            fetchedUrl += "&"
-        }
-
-        const [key, value] = entry
-        fetchedUrl += key + "=" + value
-    })
+    // Ignoring the path
+    let fetchedUrl = event.rawUrl.slice(event.rawUrl.indexOf("http", 9)) 
 
     const data = await axios.get(fetchedUrl).then(response => response.data)
 
-    console.log("Event:" + JSON.stringify(event))
-    console.log("raw url??" + event.url)
-    console.log("raw path: " + event.path)
-    console.log("query parameters path: " + JSON.stringify(event.queryStringParameters))
-    console.log("fetchedurl: " + fetchedUrl)
+    console.log("fetched url: " + fetchedUrl)
     console.log(data)
 
     return {
