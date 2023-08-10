@@ -63,7 +63,7 @@ export default function NameInput() {
 					})
 					.catch((error) => {
 						console.log(error)
-						alert("rip")
+						alert("failed")
 					});
 				}}>
 					Random cases
@@ -100,7 +100,7 @@ export default function NameInput() {
 							})
 						.catch((error) => {
 							console.log(error)
-							alert("rip")
+							alert("failed")
 						});
 					}}
 				>

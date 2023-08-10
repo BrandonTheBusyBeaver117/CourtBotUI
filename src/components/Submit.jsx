@@ -50,7 +50,7 @@ export default function Submit() {
 					// Adds all elements together in csv
 					const stringifiedUuids = (uuids.reduce((previous, current) => previous + "," + current));
 
-					alert(stringifiedUuids)
+					//alert(stringifiedUuids)
 
 					const formattedNumber = state.rawPhoneNumber.slice(0,3) + "-" + state.rawPhoneNumber.slice(3,6) + "-" + state.rawPhoneNumber.slice(6)
 
