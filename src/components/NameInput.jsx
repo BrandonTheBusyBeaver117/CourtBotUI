@@ -19,34 +19,39 @@ export default function NameInput() {
 
 		dispatch({ type: "set", prop: "unsavedChanges", val: unsavedChanges });
 
-	})
+	}, [firstName, lastName, dispatch, state.firstName, state.lastName])
 
 
 	return (
 		<div className="nameInput input-component">
 			<p>Enter your first and last name</p>
 			<div className="results">
-				<label>
-					First Name:
-				</label>
-				<input
-					placeholder="Jane"
-					onChange = {event => {
-						setFirstName(event.target.value)
-					}}
-					value = {firstName}
-				/>
 
-				<label>
-					Last Name:
-				</label>
-				<input
-					placeholder="Doe"
-					onChange = {event => {
-						setLastName(event.target.value)
-					}}
-					value = {lastName}
-				/>
+				<div>
+					<label>
+						First Name:
+					</label>
+					<input
+						placeholder="Jane"
+						onChange = {event => {
+							setFirstName(event.target.value)
+						}}
+						value = {firstName}
+					/>
+				</div>
+
+				<div>
+					<label>
+						Last Name:
+					</label>
+					<input
+						placeholder="Doe"
+						onChange = {event => {
+							setLastName(event.target.value)
+						}}
+						value = {lastName}
+					/>
+				</div>
 
 
 
