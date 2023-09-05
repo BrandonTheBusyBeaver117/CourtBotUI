@@ -12,6 +12,10 @@ After installation, run `npm install` to install dependencies
 
 Once installation has finished, run `npm start` to start the project
 
+You may not have access to api calls due to integration with Netlify
+
+Working on a way so local deployment isn't broken
+
 # Changing/Adding behavior
 
 I have set up the frontend in a way that will proxy requests to a server on localhost:5000, so test servers should be running on that
