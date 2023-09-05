@@ -2,8 +2,19 @@ import axios from "axios";
 
 export const handler = async (event, context) => {
 
-    console.log(event)
-    console.log(event.body)
-    console.log(event.queryStringParameters)
-    return axios.get("http://50.116.13.181:8080/courtbot/getRandom")
+    // Cursed, but MVP lol
+    // Slicing to get the actual url wanted
+    // Ignoring the path
+    let fetchedUrl = event.rawUrl.slice(event.rawUrl.indexOf("http", 9)) 
+
+    const data = await axios.get(fetchedUrl).then(response => response.data)
+
+    console.log("fetched url: " + fetchedUrl)
+    console.log(data)
+
+    return {
+        statusCode: 200,
+        data: JSON.stringify(data),
+        body: JSON.stringify(data)
+    }
 };

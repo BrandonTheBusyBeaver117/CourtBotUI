@@ -34,13 +34,18 @@ export default function Submit() {
 			})
 			.catch((error) => console.log(error));
 	};
+
+
+
 	return (
 		<div className="submit input-component">
 			<div className="text-confirm">
 				<h2>Confirm your information</h2>
+				
+				{(state.firstName && state.lastName) && <p>First Name: {state.firstName}</p>}
+				{(state.firstName && state.lastName) && <p>First Name: {state.lastName}</p>}
 
-				<p>First Name: {state.firstName}</p>
-				<p>Last Name: {state.lastName}</p>
+				{(state.parties.length > 0) && state.parties.map(party => <p>{party}</p>)}
 				<p>Phone Number: {state.prettifiedPhoneNumber}</p>
 			</div>
 			<button
@@ -50,11 +55,11 @@ export default function Submit() {
 					// Adds all elements together in csv
 					const stringifiedUuids = (uuids.reduce((previous, current) => previous + "," + current));
 
-					alert(stringifiedUuids)
+					//alert(stringifiedUuids)
 
 					const formattedNumber = state.rawPhoneNumber.slice(0,3) + "-" + state.rawPhoneNumber.slice(3,6) + "-" + state.rawPhoneNumber.slice(6)
 
-					handleSubmit(uuids, formattedNumber);
+					handleSubmit(stringifiedUuids, formattedNumber);
 				}}
 			>
 				Get text message reminders about your court appointment!

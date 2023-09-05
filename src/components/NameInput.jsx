@@ -19,51 +19,74 @@ export default function NameInput() {
 
 		dispatch({ type: "set", prop: "unsavedChanges", val: unsavedChanges });
 
-	})
+	}, [firstName, lastName, dispatch, state.firstName, state.lastName])
 
 
 	return (
 		<div className="nameInput input-component">
 			<p>Enter your first and last name</p>
 			<div className="results">
-				<label>
-					First Name:
-				</label>
-				<input
-					placeholder="Jane"
-					onChange = {event => {
-						setFirstName(event.target.value)
-					}}
-					value = {firstName}
-				/>
 
-				<label>
-					Last Name:
-				</label>
-				<input
-					placeholder="Doe"
-					onChange = {event => {
-						setLastName(event.target.value)
-					}}
-					value = {lastName}
-				/>
+				<div>
+					<label>
+						First Name:
+					</label>
+					<input
+						placeholder="Jane"
+						onChange = {event => {
+							setFirstName(event.target.value)
+						}}
+						value = {firstName}
+					/>
+				</div>
 
+				<div>
+					<label>
+						Last Name:
+					</label>
+					<input
+						placeholder="Doe"
+						onChange = {event => {
+							setLastName(event.target.value)
+						}}
+						value = {lastName}
+					/>
+				</div>
 
 
 				<button onClick = {() => {
+					// Random Cases
 					axios
 					.get(`${Endpoints.getRandom}`)
 					.then((response) => {
 
 						console.log(response)
+						const partySet = new Set()
+
+						// Getting the unique parties
+						response.data.forEach((appearance) => {
+							appearance.parties.forEach((party) => {
+								partySet.add(party)
+							})
+						})
 						
+
+						// Really roundabout way to get unique parties
+						const uniqueParties = []
+
+						for(const party of partySet.values()){
+							uniqueParties.push(party)
+						}
 						
+
 						dispatch({ type: "set", prop: "appearances", val: response.data});
+						dispatch({ type: "set", prop: "parties", val: uniqueParties});
 						dispatch({ type: "nextMode"})
+						
 					})
 					.catch((error) => {
 						console.log(error)
-						alert("rip")
+						alert("failed")
 					});
 				}}>
 					Random cases
@@ -100,7 +123,7 @@ export default function NameInput() {
 							})
 						.catch((error) => {
 							console.log(error)
-							alert("rip")
+							alert("failed")
 						});
 					}}
 				>
