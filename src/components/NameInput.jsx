@@ -54,17 +54,35 @@ export default function NameInput() {
 				</div>
 
 
-
 				<button onClick = {() => {
+					// Random Cases
 					axios
 					.get(`${Endpoints.getRandom}`)
 					.then((response) => {
 
 						console.log(response)
+						const partySet = new Set()
+
+						// Getting the unique parties
+						response.data.forEach((appearance) => {
+							appearance.parties.forEach((party) => {
+								partySet.add(party)
+							})
+						})
 						
+
+						// Really roundabout way to get unique parties
+						const uniqueParties = []
+
+						for(const party of partySet.values()){
+							uniqueParties.push(party)
+						}
 						
+
 						dispatch({ type: "set", prop: "appearances", val: response.data});
+						dispatch({ type: "set", prop: "parties", val: uniqueParties});
 						dispatch({ type: "nextMode"})
+						
 					})
 					.catch((error) => {
 						console.log(error)

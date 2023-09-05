@@ -5,6 +5,8 @@ export const Modes = ["Name", "Phone", "Submit", "End"];
 export const initialState = {
 	firstName: "",
 	lastName: "",
+
+	parties: [],
 	
 	prettifiedPhoneNumber: "(   )",
 	rawPhoneNumber: "",
